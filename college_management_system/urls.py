@@ -76,9 +76,28 @@ urlpatterns = [
     path('Hod/Session/Update',Hod_Views.UPDATE_SESSION,name='update_session'),
     path('Hod/Session/Delete/<str:id>',Hod_Views.DELETE_SESSION,name='delete_session'),
 
+    path('Hod/Staff/Send_Notifiction',Hod_Views.STAFF_SEND_NOTIFICATION,name='staff_send_notification'),
+    path('Hod/Staff/Save_Notifiction',Hod_Views.SAVE_STAFF_NOTIFICATION,name='save_staff_notification'),
+
+    path('Hod/Staff/Leave_view',Hod_Views.STAFF_LEAVE_VIEW,name='staff_leave_view'),
+    path('Hod/Staff/approve_leave/<str:id>',Hod_Views.STAFF_APPROVE_LEAVE,name='staff_approve_leave'),
+    path('Hod/Staff/disapprove_leave/<str:id>',Hod_Views.STAFF_DISAPPROVE_LEAVE,name='staff_disapprove_leave'),
 
 
 
+
+    # This is staff urls
+
+    path('Staff/Home',Staff_Views.HOME,name='staff_home'),
+
+
+
+    path('Staff/Notifications',Staff_Views.NOTIFICATIONS,name='notification'),
+    path('Staff/mark_as_done/<str:status>',Staff_Views.STAFF_NOTIFICATION_MARK_AS_DONE,name='staff_notification_mark_as_done'),
+
+
+    path('Staff/Apply_leave',Staff_Views.STAFF_APPLY_LEAVE,name='staff_apply_leave'),
+    path('Staff/Apply_leave_save',Staff_Views.STAFF_APPLY_LEAVE_SAVE,name='staff_apply_leave_save'),
 
 
 
