@@ -35,6 +35,10 @@ urlpatterns = [
     path('Profile',views.PROFILE,name='profile'),
     path('Profile/update',views.PROFILE_UPDATE,name='profile_update'),
 
+    # ID Card
+    path('IDCard',views.ID_CARD,name='id_card'),
+
+
 
 
     # This is Hod Panel Url
@@ -76,13 +80,19 @@ urlpatterns = [
     path('Hod/Session/Update',Hod_Views.UPDATE_SESSION,name='update_session'),
     path('Hod/Session/Delete/<str:id>',Hod_Views.DELETE_SESSION,name='delete_session'),
 
-    path('Hod/Staff/Send_Notifiction',Hod_Views.STAFF_SEND_NOTIFICATION,name='staff_send_notification'),
-    path('Hod/Staff/Save_Notifiction',Hod_Views.SAVE_STAFF_NOTIFICATION,name='save_staff_notification'),
+    path('Hod/Staff/Send_Notification',Hod_Views.STAFF_SEND_NOTIFICATION,name='staff_send_notification'),
+    path('Hod/Staff/Save_Notification',Hod_Views.SAVE_STAFF_NOTIFICATION,name='save_staff_notification'),
+
+    path('Hod/Student/Send_Notification',Hod_Views.STUDENT_SEND_NOTIFICATION,name='student_send_notification'),
+    path('Hod/Student/Save_Notification',Hod_Views.SAVE_STUDENT_NOTIFICATION,name='save_student_notification'),
+
 
     path('Hod/Staff/Leave_view',Hod_Views.STAFF_LEAVE_VIEW,name='staff_leave_view'),
     path('Hod/Staff/approve_leave/<str:id>',Hod_Views.STAFF_APPROVE_LEAVE,name='staff_approve_leave'),
     path('Hod/Staff/disapprove_leave/<str:id>',Hod_Views.STAFF_DISAPPROVE_LEAVE,name='staff_disapprove_leave'),
 
+    path('Hod/Staff/Feedback',Hod_Views.STAFF_FEEDBACK,name='staff_feedback_reply'),
+    path('Hod/Staff/Feedback/save',Hod_Views.STAFF_FEEDBACK_SAVE,name='staff_feedback_reply_save'),
 
 
 
@@ -98,6 +108,16 @@ urlpatterns = [
 
     path('Staff/Apply_leave',Staff_Views.STAFF_APPLY_LEAVE,name='staff_apply_leave'),
     path('Staff/Apply_leave_save',Staff_Views.STAFF_APPLY_LEAVE_SAVE,name='staff_apply_leave_save'),
+
+    path('Staff/Feedback',Staff_Views.STAFF_FEEDBACK,name='staff_feedback'),
+    path('Staff/Feedback/Save',Staff_Views.STAFF_FEEDBACK_SAVE,name='staff_feedback_save'),
+
+
+
+
+    # This is Student urls
+
+    path('Student/Home',Student_Views.HOME,name='student_home')
 
 
 

@@ -26,7 +26,7 @@ def doLogin(request):
                 return redirect("staff_home")
 
             elif user_type == '3':
-                return HttpResponse("This is STUDENT Pannel")
+                return redirect("student_home")
                 
             else:
                 messages.error(request,'Email and Password are Invalid !')
@@ -84,3 +84,16 @@ def PROFILE_UPDATE(request):
       
 
     return render(request,'profile.html')
+
+
+
+
+
+def ID_CARD(request):
+    user = CustomUser.objects.get(id= request.user.id)
+    
+
+    context = {
+        'user':user,
+    }
+    return render(request,'IDCard.html',context)
