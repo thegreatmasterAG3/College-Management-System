@@ -32,15 +32,16 @@
                     <br>
                     <b>DOB :</b> 02/11/2020
                     <br>
-                    <b>Program :</b> BE Computer
+                    <b>Program :</b> B.E Computer
                     <br>
                     <b>Batch :</b>2023
-                    <div class="Address"><b>Address : </b>223 par-1 hari soc 223 par-1 hari soc</div>
+                    <div class="Address"><b>Address : </b>{{user.address}}</div>
                     
                 </div>
 
                 <div class="barcode">
-                    <img src="{% static 'assets/img/qrsample.png' %}" alt="">
+                    <img src="{{ MEDIA_URL }}media\qr_codes\qr_{{user.username}}.png" alt="">
+                  
                 </div>
                 <div class="qr">
                     <img src="{% static 'assets/img/barcode.png' %}" alt="">
@@ -89,12 +90,12 @@
                     <b>Program :</b> BE Computer
                     <br>
                     <b>Batch :</b>2023
-                    <div class="Address"><b>Address : </b>223 par-1 hari soc 223 par-1 hari soc</div>
+                    <div class="Address"><b>Address : </b>{{user.staff.address}}</div>
                     
                 </div>
 
                 <div class="barcode">
-                    <img src="{% static 'assets/img/qrsample.png' %}" alt="">
+                    <img src="{{ MEDIA_URL }}media\qr_codes\qr_{{user.username}}.png" alt="">
                 </div>
                 <div class="qr">
                     <img src="{% static 'assets/img/barcode.png' %}" alt="">
@@ -111,6 +112,61 @@
 
 {% else %}
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assets/css/id.css' %}">
+
+
+    <title>ID Card</title>
+</head>
+<body>
+
+    
+    <div class="container">
+        <div class="padding">
+        <div class="font" style="background-image: url('{% static 'assets/img/ecardbgfinal.png' %}');">
+            <div class="companyname">Planics<br><span class="tab">Solution</span></div>
+            <div class="top">
+                <img src="/{{user.profile_pic}}" alt="">
+            </div>
+        
+                <div class="ename">
+                <p class="p1"><b>{{user.first_name}}&nbsp;{{user.last_name}}</b></p>
+                </div>
+        
+                <div class="edetails">
+                    <b>Mobile No :</b> 8460304196
+                    <br>
+                    <b>DOB :</b> 02/11/2020
+                    <br>
+                    <b>Program :</b> {{user.student.course_id}}
+                    <br>
+                    <b>Batch :</b>{{user.student.session_year_id}}
+                    <div class="Address"><b>Address : </b>{{user.student.address}}</div>
+                 
+                    
+                </div>
+
+                <div class="barcode">
+                    
+                    <img src="{{ MEDIA_URL }}media\qr_codes\qr_{{user.username}}.png" alt="">
+                   
+                </div>
+                <div class="qr">
+                    <img src="{% static 'assets/img/barcode.png' %}" alt="">
+                </div>
+
+          
+           
+        </div>
+    </div>
+       
+    </div>
+</body>
+</html>
 
 {% endif %}
 

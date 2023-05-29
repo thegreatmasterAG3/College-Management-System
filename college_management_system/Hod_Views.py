@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-from app.models import Course,Session_Year,CustomUser,Student,Staff,Subject,Staff_Notification,Staff_Leave,Staff_Feedback,Student_Notification
+from app.models import Course,Session_Year,CustomUser,Student,Staff,Subject,Staff_Notification,Staff_Leave,Staff_Feedback,Student_Notification,QRCODE
 from django.contrib import messages
 
 
@@ -29,6 +29,12 @@ def HOME(request):
 
     return render(request,'Hod/home.html',context)
 
+
+from django.shortcuts import render
+from django.conf import settings
+from qrcode import *
+import os
+
 @login_required(login_url='/')
 def ADD_STUDENT(request):
     course = Course.objects.all()
@@ -45,6 +51,15 @@ def ADD_STUDENT(request):
         gender = request.POST.get("gender")
         course_id = request.POST.get("course_id")
         session_year_id = request.POST.get("session_year_id")
+
+        # to generate QRcode
+        img = make(username)
+        img_name = 'qr' + '_' + username + '.png'
+        img_path = os.path.join(settings.MEDIA_ROOT,'media/qr_codes', img_name)
+        img.save(img_path)  # Convert WindowsPath to string
+
+        # Save the QR code image in the database
+        qr_code = QRCODE.objects.create(image=img_name)
 
         if CustomUser.objects.filter(email=email).exists():
             messages.warning(request,'Email Is Already Taken')
@@ -238,6 +253,15 @@ def ADD_STAFF(request):
         password = request.POST.get("password")
         address = request.POST.get("address")
         gender = request.POST.get("gender")
+
+         # to generate QRcode
+        img = make(username)
+        img_name = 'qr' + '_' + username + '.png'
+        img_path = os.path.join(settings.MEDIA_ROOT,'media/qr_codes', img_name)
+        img.save(img_path)  # Convert WindowsPath to string
+
+        # Save the QR code image in the database
+        qr_code = QRCODE.objects.create(image=img_name)
         
         if CustomUser.objects.filter(email=email).exists():
             messages.warning(request,"Email Is Already Taken")
@@ -567,9 +591,11 @@ def STAFF_FEEDBACK_SAVE(request):
 
 def STUDENT_SEND_NOTIFICATION(request):
     student = Student.objects.all()
+    notification = Student_Notification.objects.all()
 
     context = {
         'student': student,
+        'notification': notification,
     }
 
     return render(request,'Hod/student_notification.html',context)

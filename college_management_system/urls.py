@@ -41,6 +41,7 @@ urlpatterns = [
 
 
 
+
     # This is Hod Panel Url
     path('Hod/Home',Hod_Views.HOME,name='hod_home'),
     path('Hod/Student/Add',Hod_Views.ADD_STUDENT,name='add_student'),
@@ -117,7 +118,14 @@ urlpatterns = [
 
     # This is Student urls
 
-    path('Student/Home',Student_Views.HOME,name='student_home')
+    path('Student/Home',Student_Views.HOME,name='student_home'),
+
+    path('Student/Notification',Student_Views.STUDENT_NOTIFICATION,name='student_notification'),
+    path('Student/mark_as_done/<str:status>',Student_Views.STUDENT_NOTIFICATION_MARK_AS_DONE,name='student_notification_mark_as_done'),
+
+    path('Student/feedback',Student_Views.STUDENT_FEEDBACK,name='student_feedback'),
+    path('Student/feedback/save',Student_Views.STUDENT_FEEDBACK_SAVE,name='student_feedback_save'),
+
 
 
 

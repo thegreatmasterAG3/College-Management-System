@@ -85,4 +85,6 @@ def STAFF_FEEDBACK_SAVE(request):
             feedback_reply = '',
         )
         feedback.save()
+        messages.success(request,'Feedback are Successfully Sent')
+
         return redirect('staff_feedback')

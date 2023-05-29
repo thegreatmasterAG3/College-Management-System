@@ -3,7 +3,7 @@ from app.EmailBackEnd import EmailBackEnd
 from django.contrib.auth import authenticate,logout,login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from app.models import CustomUser
+from app.models import CustomUser,QRCODE,Student,Staff
 
 def BASE(request):
     return render(request,'base.html')
@@ -11,6 +11,11 @@ def BASE(request):
 def LOGIN(request):
     return render(request,'login.html')
 
+
+from django.shortcuts import render
+from django.conf import settings
+from qrcode import *
+import os
 
 def doLogin(request):
     if request.method == "POST":
@@ -21,6 +26,14 @@ def doLogin(request):
             login(request,user)
             user_type = user.user_type
             if user_type == '1':
+                 # to generate QRcode
+                img = make(user.username)
+                img_name = 'qr' + '_' + user.username + '.png'
+                img_path = os.path.join(settings.MEDIA_ROOT,'media/qr_codes', img_name)
+                img.save(img_path)  # Convert WindowsPath to string
+
+                # Save the QR code image in the database
+                qr_code = QRCODE.objects.create(image=img_name)
                 return redirect('hod_home')
             elif user_type == '2':
                 return redirect("staff_home")
@@ -91,9 +104,17 @@ def PROFILE_UPDATE(request):
 
 def ID_CARD(request):
     user = CustomUser.objects.get(id= request.user.id)
-    
+    student = Student.objects.all()
+    staff = Staff.objects.all()
+
+
 
     context = {
         'user':user,
+        'student':student,
+        'staff':staff,
     }
     return render(request,'IDCard.html',context)
+
+
+
